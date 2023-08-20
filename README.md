@@ -1,4 +1,4 @@
-# Getting Started with TaqneeqFestWebsite
+# The Hackers Club
 
 
 ## Available Scripts
