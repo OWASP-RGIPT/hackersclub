@@ -1,0 +1,12 @@
+section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 93.4vh   !important;
+  color: var(--color-white) !important;
+}
+
+section:focus {
+  outline: none;
+}

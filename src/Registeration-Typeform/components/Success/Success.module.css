@@ -1,0 +1,9 @@
+.container {
+  display: flex  !important;
+  flex-direction: row  !important;
+  width: 744px   !important;
+  margin-right: 50px   !important;
+  padding-top: 32px   !important;
+  padding-bottom: 80px   !important;
+  padding-left: 38px   !important;
+}
