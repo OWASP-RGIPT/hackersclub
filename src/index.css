@@ -411,6 +411,12 @@ code {
 		font-size: 0.7rem !important;
 		padding: 0.2rem;
 	}
+	.menu-wrap .menu {
+	
+		overflow-y: auto !important;
+
+	
+	}
 }
 
 

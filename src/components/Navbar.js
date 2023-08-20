@@ -13,7 +13,7 @@ export default function Navbar()
                 <div className="menu-wrap">
                     <input type="checkbox" className="toggler" />
                     <div className="hamburger" ><div></div></div>
-                    <div className="menu" style={{overflowY:'auto'}}>
+                    <div className="menu" >
                         <div>
                             <div>
                                 <ul>
