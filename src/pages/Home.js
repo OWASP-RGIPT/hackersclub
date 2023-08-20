@@ -32,7 +32,7 @@ function Home({ showIntro }) {
                     <div>
                         <div
                             className="position-absolute text-white d-flex flex-column justify-content-md-center"
-                            style={{ top: '25%', right: 0, bottom: 0, left: 0,overflowY:'scroll' }}
+                            style={{ top: '25%', right: 0, bottom: 0, left: 0,overflowY:'auto' }}
 
                         >
                             <div className="container px-5 mt-20-mobile">
