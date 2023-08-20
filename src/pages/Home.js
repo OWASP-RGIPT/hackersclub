@@ -86,7 +86,7 @@ function Home({ showIntro }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-3 col-md-2 align-self-end fade-in-text delayed" style={{marginBottom:'40px'}}>
+                            <div className="col-3 col-md-2 align-self-end fade-in-text delayed" style={{marginBottom:'60px'}}>
                                 {/* Additional content */}
                             </div>
                         </div>
