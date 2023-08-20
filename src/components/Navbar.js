@@ -12,8 +12,8 @@ export default function Navbar()
             <nav className="navbar shadow-5-strong p-navbar fixed-top">
                 <div className="menu-wrap">
                     <input type="checkbox" className="toggler" />
-                    <div className="hamburger"><div></div></div>
-                    <div className="menu">
+                    <div className="hamburger" ><div></div></div>
+                    <div className="menu" style={{overflowY:'scroll'}}>
                         <div>
                             <div>
                                 <ul>
@@ -31,7 +31,7 @@ export default function Navbar()
                         </div>
                     </div>
                 </div>
-                <a className="navbar-brand fw-bold" href="contactus"></a>
+                <a className="navbar-brand fw-bold" href=""></a>
                 <a className="navbar-brand" href="/" >
                     <img src={tqlogo}  width="200" height="200" alt="" style={{marginTop:'-100px',marginRight:'-50px'}}/>
                 </a>

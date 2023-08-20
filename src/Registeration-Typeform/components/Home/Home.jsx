@@ -17,6 +17,9 @@ const Home = () => {
     dispatch(formActions.incrementPointer());
   };
 
+
+  
+
   return (
     <motion.div
       initial={scrollDirection < 0 ? { y: -300, opacity: 0 } : { opacity: 0 }}

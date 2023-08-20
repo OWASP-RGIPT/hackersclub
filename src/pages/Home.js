@@ -32,7 +32,8 @@ function Home({ showIntro }) {
                     <div>
                         <div
                             className="position-absolute text-white d-flex flex-column justify-content-md-center"
-                            style={{ top: '35%', right: 0, bottom: 0, left: 0 }}
+                            style={{ top: '25%', right: 0, bottom: 0, left: 0,overflowY:'scroll' }}
+
                         >
                             <div className="container px-5 mt-20-mobile">
                                 <div className="row h-auto">
@@ -85,7 +86,7 @@ function Home({ showIntro }) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-3 col-md-2 align-self-end fade-in-text delayed">
+                            <div className="col-3 col-md-2 align-self-end fade-in-text delayed" style={{marginBottom:'40px'}}>
                                 {/* Additional content */}
                             </div>
                         </div>
