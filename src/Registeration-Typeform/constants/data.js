@@ -102,6 +102,6 @@ const industries = [
   'Alternative Medicine',
 ];
 
-const apiURL = 'http://34.131.158.86:1337';
+const apiURL = '/api';
 
 export { homeText, formText, errorMessages, industries, apiURL };

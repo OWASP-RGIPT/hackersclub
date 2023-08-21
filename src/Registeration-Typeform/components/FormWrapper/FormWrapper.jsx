@@ -53,7 +53,7 @@ const FormWrapper = () => {
       const headers = new Headers();
       headers.append('Authorization', 'Bearer owasp_neon$1337');
   
-      const response = await fetch(`${apiURL}/api/set-user`, {
+      const response = await fetch(`${apiURL}/set-user`, {
         method: 'POST',
         headers: headers,
         body: formData
