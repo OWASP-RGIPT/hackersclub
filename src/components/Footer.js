@@ -4,8 +4,7 @@ function Footer() {
   return (
 <div style={{marginTop:"10", textAlign:'center'}} className="footer-container">
     <>
-        Crafted with ❤️ using Blockchain and IPFS for Unparalleled Transparency!<br />
-        Powered by OWASP RGIPT.
+        Crafted with ❤️ by <a href="https://owasp.org/www-chapter-rajiv-gandhi-institute-of-petroleum-technology/" target='_blank' style={{textDecoration:'none',color:'white'}}>&nbsp;OWASP RGIPT </a>&nbsp;using Blockchain and IPFS for Unparalleled Transparency!
     </>
 </div>
   )
