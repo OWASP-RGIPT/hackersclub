@@ -89,7 +89,7 @@ function ContactUs() {
                             <div>
                                 {/* <MapSection location={location} zoomLevel={17} /> include it here */}
                             </div>
-                            <div className='text-center mt-5'>
+                            <div className='text-center mt-5' style={{marginBottom:'100px'}}>
 
 
 
