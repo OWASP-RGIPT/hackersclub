@@ -84,6 +84,7 @@ const errorMessages = {
   emailAddressErrors: [
     'Please fill this in',
     "Hmm... that email doesn't look right",
+    "Email already registered!"
   ],
   phoneNumber: "Hmm... that phone number doesn't look right",
   phoneNumberErrors: [
@@ -101,6 +102,6 @@ const industries = [
   'Alternative Medicine',
 ];
 
-const apiURL = 'https://eo3oi83n1j77wgp.m.pipedream.net';
+const apiURL = 'http://34.131.158.86:1337';
 
 export { homeText, formText, errorMessages, industries, apiURL };

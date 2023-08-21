@@ -9,10 +9,7 @@ for (let i = 1; i < 9; i++) {
 let formData = {
   Name: '',
   BranchName: '',
-  industry: '',
   file:'',
-  role: '',
-  professionalGoal: [],
   emailAddress: '',
   phoneNumber: '',
   phoneExtension: '+91',

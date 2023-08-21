@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { errorMessages } from '../../constants/data';
 import { formActions } from '../../store/form-slice';
@@ -7,15 +7,24 @@ import { formActions } from '../../store/form-slice';
 import formElements from '../../constants/form-elements';
 
 import { apiURL } from '../../constants/data';
+import img from '../../../assets/email.png';
 
 import styles from './FormWrapper.module.css';
+
+function extractRollNumber(email) {
+  const pattern = /^(\d{2}[a-zA-Z]{2}\d{4})@.*$/;
+  const match = email.match(pattern);
+  return match[1];
+}
 
 const FormWrapper = () => {
   const dispatch = useDispatch();
   const pointer = useSelector((state) => state.form.pointer);
   const formValidity = useSelector((state) => state.form.formValidity);
-  const formData = useSelector((state) => state.form.formData);
-
+  const formVal = useSelector((state) => state.form.formData);
+  const [loading, setLoading] = useState(false);
+  const [submissionFailed, setSubmissionFailed] = useState(false);
+  
   const sectionRef = useRef();
 
   useEffect(() => {
@@ -27,41 +36,61 @@ const FormWrapper = () => {
   let CurrentElement = formElements.componentArray[pointer];
 
   async function onFormSubmit() {
-    // Construct package
-    let formElements = { ...formData };
-    let phoneWithExtension =
-      formElements.phoneExtension + formElements.phoneNumber;
-    formElements.phoneNumber = phoneWithExtension;
-    delete formElements.phoneExtension;
+    const formData = new FormData();
+    formData.append('image', formVal.file);
+    formData.append('name', formVal.Name);
+    formData.append('email', formVal.emailAddress);
+    formData.append('phone', formVal.phoneNumber); 
+    formData.append('branch', formVal.BranchName);
 
-    // Send request
-    const response = await fetch(apiURL, {
-      method: 'POST',
-      body: JSON.stringify(formElements),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (response.ok) {
-      console.log('Successfully submitted!');
+    const rollNumber = extractRollNumber(formVal.emailAddress);
+    formData.append('rollNo', rollNumber);
+  
+    try {
+      setLoading(true);
+      setSubmissionFailed(false);
+   
+      const headers = new Headers();
+      headers.append('Authorization', 'Bearer owasp_neon$1337');
+  
+      const response = await fetch(`${apiURL}/api/set-user`, {
+        method: 'POST',
+        headers: headers,
+        body: formData
+      });
+  
+      console.log(response);
+      console.log(formData);
+  
+      if (response.ok) {
+        console.log('Successfully submitted!');
+        setLoading(false);
+        dispatch(formActions.incrementPointer());
+      } else {
+        setLoading(false);
+        console.log('Submission failed.');
+        setSubmissionFailed(true);
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   }
-
+  
   const showNextElement = () => {
-    // Handle Form Submission
-    if (
-      formValidity[pointer] &&
-      pointer === formElements.numberOfElements - 2
-    ) {
-      onFormSubmit();
+    if (formValidity[pointer]) {
+      if (pointer === formElements.numberOfElements - 2) {
+        // Submit the form if on the second-to-last element
+        onFormSubmit();
+      } else {
+        // Move to the next form element
+        dispatch(formActions.incrementPointer());
+      }
+    } else {
+      // Show error message for the current form element
+      dispatch(
+        formActions.setErrorMessage(errorMessages[CurrentElement.displayName])
+      );
     }
-
-    formValidity[pointer]
-      ? dispatch(formActions.incrementPointer())
-      : dispatch(
-          formActions.setErrorMessage(errorMessages[CurrentElement.displayName])
-        );
   };
 
   // Throttling for scroll handler
@@ -122,7 +151,13 @@ const FormWrapper = () => {
       tabIndex={0}
       ref={sectionRef}
     >
-      <CurrentElement showNextElement={showNextElement} />
+      {loading ? (
+       <span class={styles.loader}></span>
+      ) : submissionFailed ? (
+        <div className={styles.failureMessage} style={{textAlign:'center'}}>Hold on! It seems like you're already a proud member of the Hackers Club.<br/> Great to have you with us!</div>
+      ) : (
+        <CurrentElement showNextElement={showNextElement} />
+      )}
     </section>
   );
 };

@@ -9,9 +9,37 @@ import { formText } from '../../../constants/data';
 
 import styles from './EmailAddress.module.css';
 
-import { errorMessages } from '../../../constants/data';
+import { errorMessages,apiURL } from '../../../constants/data';
 
 import { motion } from 'framer-motion';
+
+
+const getAndValidateUserData = async (data) => {
+  const rollNumber= data.split('@')[0];
+    try {
+    
+      const response = await fetch(`${apiURL}/api/get-user/${rollNumber}`);
+      
+
+      if (response.status === 200) {
+         // Check if email is already registered
+         console.log('hello');
+          return 'INVALID';
+           // Display error message for email already registered
+        } else {
+       
+
+          return 'VALID';
+          
+        }
+ 
+    } catch (error) {
+     
+      console.error('Error fetching user data:', error);
+    }
+  
+};
+
 
 const validateEmail = (value) => {
   if (value === '') {
@@ -19,7 +47,7 @@ const validateEmail = (value) => {
   } else if (!/^[\w\.-]+@rgipt\.ac\.in$/.test(value)) {
     return 'INVALID';
   } else {
-    return 'VALID';
+    return  'VALID';
   }
 };
 
@@ -35,8 +63,8 @@ const EmailAddress = ({ showNextElement }) => {
   const inputRef = useRef();
 
   const emailAddress = formData.emailAddress;
-  let emailIsValid = validateEmail(emailAddress.trim());
-
+  let emailIsValid =  validateEmail(emailAddress.trim());
+  console.log(emailIsValid)
   useEffect(() => {
     setTimeout(() => {
       if (inputRef.current) {
@@ -69,9 +97,12 @@ const EmailAddress = ({ showNextElement }) => {
       dispatch(formActions.decrementProgress());
   }, [dispatch, emailIsValid, pointer, progress]);
 
+  
   const emailChangeHandler = (event) => {
     dispatch(formActions.setErrorMessage(null));
     dispatch(formActions.setFormData({ emailAddress: event.target.value }));
+
+    
   };
 
   const navigationHandler = () => {
@@ -88,11 +119,15 @@ const EmailAddress = ({ showNextElement }) => {
       if (progress !== (pointer - 1) * 100)
         dispatch(formActions.decrementProgress());
     } else if (emailIsValid === 'VALID') {
-      dispatch(formActions.setElementValidity({ pointer, isValid: true }));
-      dispatch(formActions.setErrorMessage(null));
-      if (progress < pointer * 100) dispatch(formActions.incrementProgress());
-
-      showNextElement();
+     
+          dispatch(formActions.setElementValidity({ pointer, isValid: true }));
+          dispatch(formActions.setErrorMessage(null));
+          if (progress < pointer * 100) dispatch(formActions.incrementProgress());
+    
+          showNextElement();
+        
+        
+      
     }
   };
 

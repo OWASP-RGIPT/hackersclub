@@ -40,23 +40,15 @@ function Home({ showIntro }) {
                                     <div className="col-7 my-auto">
                                     
                                         <div className="my-2 display-3 fw-bold  ">
-                                        <a href="#" class="cipher">
-                                            The Hackers  
-                                            </a> 
-                                            <br/>
-                                            </div>
-                                            <div className="my-2 display-3 fw-bold ">
-                                            <a href="#" class="cipher">   
-                                           Club
-                                           </a> 
+                                          The Hackers <br/>Club
                                            </div>
                                       
 
                                         
                                         <h4 className="my-2 display-6 fw-bold ">
-                                        <a href="#" class="cipher">  
+                                        {/* <a href="#" class="cipher">   */}
                                             OWASP RGIPT
-                                            </a> 
+                                            {/* </a>  */}
                                         </h4>
                                     </div>
                                 </div>
