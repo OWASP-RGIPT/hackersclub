@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, ButtonLabel, Error } from '../..';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -72,6 +72,16 @@ const File = ({ showNextElement }) => {
     footer = <Error message={errorMessage} />;
   }
 
+  const [paymentLink, setPaymentLink] = useState('');
+
+  useEffect(() => {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      setPaymentLink("upi://pay?pa=raj.aryaman0816@okhdfcbank&pn=OWASP%20RGIPT&cu=INR&am=1000");
+    } else {
+      setPaymentLink("https://upilinks.in/payment-link/upi1693389504");
+    }
+  }, []);
   return (
     <motion.div
       initial={{ y: scrollDirection > 0 ? 300 : -300, opacity: 0 }}
@@ -86,9 +96,9 @@ const File = ({ showNextElement }) => {
 
       <div className="formControl">
         <label>
-          <span className="labelText">{formText.File.labelText}</span>
+          <span className="labelText">  Please <a href={paymentLink} target="_blank" rel="noopener noreferrer">Pay Here</a> and upload the payment screenshot.</span>
         </label>
-
+        
         <input
           type="file"
           id="file"
